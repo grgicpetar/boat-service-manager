@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const radniciMock = [
   { naziv: "Radnik 1", key: "1" },
@@ -15,6 +16,7 @@ const radniciMock = [
 ];
 
 export default function Brodovi() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -30,7 +32,13 @@ export default function Brodovi() {
         style={styles.listaRadnika}
         data={radniciMock}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.listaRadnikaItem} activeOpacity={0.9}>
+          <TouchableOpacity
+            style={styles.listaRadnikaItem}
+            activeOpacity={0.9}
+            onPress={() =>
+              navigation.navigate("Radnik", { imeRadnika: item.naziv })
+            }
+          >
             <Text style={styles.listaRadnikaItemText}>{item.naziv}</Text>
           </TouchableOpacity>
         )}

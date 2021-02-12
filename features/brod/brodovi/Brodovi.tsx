@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Fontisto, AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const brodoviMock = [
   { naziv: "Brod 1", key: "1" },
@@ -15,6 +16,7 @@ const brodoviMock = [
 ];
 
 export default function Brodovi() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -30,12 +32,19 @@ export default function Brodovi() {
         style={styles.listaBrodova}
         data={brodoviMock}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.listaBrodovaItem} activeOpacity={0.9}>
+          <TouchableOpacity
+            style={styles.listaBrodovaItem}
+            activeOpacity={0.9}
+            onPress={() => navigation.navigate("Brod", { naziv: item.naziv })}
+          >
             <Text style={styles.listaBrodovaItemText}>{item.naziv}</Text>
           </TouchableOpacity>
         )}
       />
-      <TouchableOpacity activeOpacity={0.9}>
+      <TouchableOpacity
+        activeOpacity={0.9}
+        onPress={() => navigation.navigate("NoviBrod")}
+      >
         <AntDesign name="pluscircleo" size={32} color="#ECECEC" />
       </TouchableOpacity>
     </View>
