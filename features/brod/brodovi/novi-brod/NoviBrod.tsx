@@ -9,6 +9,7 @@ import {
   Button,
   Image,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { ScrollView } from "react-native-gesture-handler";
@@ -20,8 +21,8 @@ const radniciMock = [
 ];
 
 export default function NoviBrod() {
-  const [nazivBroda, setNazivBroda] = useState<string>();
-  const [dodatneInfo, setDodatneInfo] = useState<string>();
+  const [nazivBroda, setNazivBroda] = useState<string>("");
+  const [dodatneInfo, setDodatneInfo] = useState<string>("");
   const [zaduzeniRadniciKeys, setZaduzeniRadniciKeys] = useState<string[]>([]);
   const [slikaBroda, setSlikaBroda] = useState<string>("");
 
@@ -66,6 +67,23 @@ export default function NoviBrod() {
     }
   };
 
+  function submitBrod() {
+    const brodIsValid = validateBrod();
+    if (brodIsValid === "valid") {
+      Alert.alert("Novi brod", "Uspješno dodan novi brod!");
+    } else {
+      Alert.alert("Novi brod", brodIsValid);
+    }
+  }
+
+  function validateBrod(): string {
+    if (nazivBroda.length < 2) {
+      return "Ime broda mora sadržavati barem 2 znaka.";
+    }
+
+    return "valid";
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
@@ -99,7 +117,7 @@ export default function NoviBrod() {
                   backgroundColor: zaduzeniRadniciKeys.find(
                     (zaduzeniRadnikKey) => zaduzeniRadnikKey === radnik.key
                   )
-                    ? "#b6b5b5"
+                    ? "#9bc8ee"
                     : "#ECECEC",
                 },
               ]}
@@ -117,7 +135,9 @@ export default function NoviBrod() {
         <TouchableOpacity
           style={styles.spremiButton}
           activeOpacity={0.9}
-          onPress={() => {}}
+          onPress={() => {
+            submitBrod();
+          }}
         >
           <Text style={styles.spremiButtonText}>Spremi</Text>
         </TouchableOpacity>

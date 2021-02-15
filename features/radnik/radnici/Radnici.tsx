@@ -43,7 +43,10 @@ export default function Brodovi() {
           </TouchableOpacity>
         )}
       />
-      <TouchableOpacity activeOpacity={0.9}>
+      <TouchableOpacity
+        activeOpacity={0.9}
+        onPress={() => navigation.navigate("NoviRadnik")}
+      >
         <AntDesign name="pluscircleo" size={32} color="#ECECEC" />
       </TouchableOpacity>
     </View>
