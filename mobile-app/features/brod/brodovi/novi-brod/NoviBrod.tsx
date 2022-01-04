@@ -13,18 +13,6 @@ export default function NoviBrod() {
     const [nazivBroda, setNazivBroda] = useState<string>("");
     const [dodatneInfo, setDodatneInfo] = useState<string>("");
     const [zaduzeniRadniciKeys, setZaduzeniRadniciKeys] = useState<string[]>([]);
-    const [slikaBroda, setSlikaBroda] = useState<string>("");
-
-    useEffect(() => {
-        (async () => {
-            if (Platform.OS !== "web") {
-                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-                if (status !== "granted") {
-                    alert("Sorry, we need camera roll permissions to make this work!");
-                }
-            }
-        })();
-    }, []);
 
     function toggleRadnik(radnikKey: string) {
         if (!zaduzeniRadniciKeys.find((zaduzeniRadnikKey) => zaduzeniRadnikKey === radnikKey)) {
@@ -36,19 +24,6 @@ export default function NoviBrod() {
             setZaduzeniRadniciKeys(filtriraniRadnici);
         }
     }
-
-    const izaberiSliku = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-
-        if (!result.cancelled) {
-            setSlikaBroda(result.uri);
-        }
-    };
 
     function submitBrod() {
         const brodIsValid = validateBrod();
@@ -111,8 +86,6 @@ export default function NoviBrod() {
                         </TouchableOpacity>
                     ))}
                 </View>
-                <Button title="Izaberite sliku broda" onPress={izaberiSliku} />
-                {slikaBroda.length > 0 && <Image source={{ uri: slikaBroda }} style={styles.slikaBroda} />}
                 <TouchableOpacity
                     style={styles.spremiButton}
                     activeOpacity={0.9}
