@@ -19,6 +19,26 @@ export default function Login({ navigation }: PrijavaProps) {
         }
     }, [isFocused]);
 
+    const handleLogin = async () => {
+        try {
+            const response = await fetch("http://192.168.1.2:3000/login", {
+                method: "post",
+                body: JSON.stringify({
+                    username,
+                    password,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const json = await response.json();
+            console.log(json[0]);
+        } catch (error) {
+            console.log("sss");
+        } finally {
+        }
+    };
+
     return (
         <View style={styles.container}>
             <Image style={styles.logo} source={require("../../assets/logo.png")} />
@@ -42,13 +62,7 @@ export default function Login({ navigation }: PrijavaProps) {
                         onChangeText={(text) => setPassword(text)}
                     />
                 </View>
-                <TouchableOpacity
-                    style={styles.loginButton}
-                    activeOpacity={0.9}
-                    onPress={() => {
-                        navigation.navigate("Home", { username });
-                    }}
-                >
+                <TouchableOpacity style={styles.loginButton} activeOpacity={0.9} onPress={handleLogin}>
                     <Text style={styles.loginButtonText}>Prijava</Text>
                 </TouchableOpacity>
             </View>
