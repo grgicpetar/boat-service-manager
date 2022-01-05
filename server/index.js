@@ -29,10 +29,10 @@ app.get("/user/:name", async (req, res) => {
 });
 
 app.post("/user", async (req, res) => {
-    const { name } = req.body;
+    const { name, password } = req.body;
     try {
-        const user = await pool.query(`INSERT INTO "boat-service-manager".user(name, role)
-        VALUES ('${name}', 2);`);
+        const user = await pool.query(`INSERT INTO "boat-service-manager".user(name, password, role)
+        VALUES ('${name}','${password}' 2);`);
 
         res.json(user);
     } catch (error) {
@@ -96,6 +96,29 @@ app.get("/record/ship/:ship", async (req, res) => {
         const records = await pool.query(`SELECT * FROM "boat-service-manager".record WHERE ship = '${ship}'  `);
 
         res.json(records.rows);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+//LOGIN
+
+app.post("/login", async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const user = await pool.query(`SELECT * FROM "boat-service-manager".user 
+        WHERE
+        name = '${username}'`);
+
+        if (user.rows.length > 0) {
+            if (user.rows[0].password === password) {
+                res.json(user.rows);
+            } else {
+                res.sendStatus(401);
+            }
+        } else {
+            res.sendStatus(404);
+        }
     } catch (error) {
         console.error(error);
     }
