@@ -12,9 +12,7 @@ import NoviRadnik from "./features/radnik/novi-radnik/NoviRadnik";
 
 export type RootStackParamList = {
     Login: undefined;
-    Home: {
-        username: string;
-    };
+    Home: undefined;
     Brodovi: undefined;
     Brod: {
         naziv: string;

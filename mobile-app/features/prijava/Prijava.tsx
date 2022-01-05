@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { View, StyleSheet, Image, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, Text, TextInput, TouchableOpacity, ToastAndroid } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../App";
+import { useStore } from "../../store/zustand-store";
 
 type PrijavaProps = NativeStackScreenProps<RootStackParamList, "Login">;
 
@@ -11,6 +12,7 @@ export default function Login({ navigation }: PrijavaProps) {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const isFocused = useIsFocused();
+    const setUser = useStore().setUser;
 
     useEffect(() => {
         if (!isFocused) {
@@ -32,9 +34,14 @@ export default function Login({ navigation }: PrijavaProps) {
                 },
             });
             const json = await response.json();
-            console.log(json[0]);
+            let user = json[0];
+            setUser({
+                username: user.name,
+                role: user.role,
+            });
+            navigation.navigate("Home");
         } catch (error) {
-            console.log("sss");
+            ToastAndroid.show("Krivo korisničko ime ili lozinka", ToastAndroid.SHORT);
         } finally {
         }
     };

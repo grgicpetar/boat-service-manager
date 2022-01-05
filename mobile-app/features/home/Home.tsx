@@ -3,14 +3,16 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Fontisto, FontAwesome } from "@expo/vector-icons";
 import { RootStackParamList } from "../../App";
+import { useStore } from "../../store/zustand-store";
 
 type HomeProps = NativeStackScreenProps<RootStackParamList, "Home">;
 
 export default function Home({ route, navigation }: HomeProps) {
+    const user = useStore().user;
     return (
         <View style={styles.container}>
             <Image style={styles.logo} source={require("../../assets/logo.png")} />
-            <Text style={styles.username}>{route.params.username} (administrator)</Text>
+            <Text style={styles.username}>{user?.username} (administrator)</Text>
             <TouchableOpacity
                 style={styles.menuButton}
                 activeOpacity={0.9}
