@@ -5,9 +5,9 @@ import { Fontisto, FontAwesome } from "@expo/vector-icons";
 import { RootStackParamList } from "../../App";
 import { useStore } from "../../store/zustand-store";
 
-type HomeProps = NativeStackScreenProps<RootStackParamList, "Home">;
+type HomeProps = NativeStackScreenProps<RootStackParamList, "HomeAdmin">;
 
-export default function Home({ route, navigation }: HomeProps) {
+export default function HomeAdmin({ route, navigation }: HomeProps) {
     const user = useStore().user;
     return (
         <View style={styles.container}>

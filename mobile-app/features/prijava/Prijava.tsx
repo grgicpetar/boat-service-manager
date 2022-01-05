@@ -39,7 +39,11 @@ export default function Login({ navigation }: PrijavaProps) {
                 username: user.name,
                 role: user.role,
             });
-            navigation.navigate("Home");
+            if (user.role === 1) {
+                navigation.navigate("HomeAdmin");
+            } else {
+                navigation.navigate("HomeRadnik");
+            }
         } catch (error) {
             ToastAndroid.show("Krivo korisničko ime ili lozinka", ToastAndroid.SHORT);
         } finally {

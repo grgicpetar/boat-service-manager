@@ -2,7 +2,8 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./features/prijava/Prijava";
-import Home from "./features/home/Home";
+import HomeAdmin from "./features/home/HomeAdmin";
+import HomeRadnik from "./features/home/HomeRadnik";
 import Brodovi from "./features/brod/brodovi/Brodovi";
 import Radnici from "./features/radnik/radnici/Radnici";
 import Brod from "./features/brod/brod/Brod";
@@ -12,7 +13,8 @@ import NoviRadnik from "./features/radnik/novi-radnik/NoviRadnik";
 
 export type RootStackParamList = {
     Login: undefined;
-    Home: undefined;
+    HomeAdmin: undefined;
+    HomeRadnik: undefined;
     Brodovi: undefined;
     Brod: {
         naziv: string;
@@ -32,7 +34,8 @@ export default function App() {
         <NavigationContainer>
             <RootStack.Navigator initialRouteName="Login">
                 <RootStack.Screen name="Login" component={Login} />
-                <RootStack.Screen name="Home" component={Home} />
+                <RootStack.Screen name="HomeAdmin" component={HomeAdmin} />
+                <RootStack.Screen name="HomeRadnik" component={HomeRadnik} />
                 <RootStack.Screen name="Brodovi" component={Brodovi} />
                 <RootStack.Screen name="Brod" component={Brod} />
                 <RootStack.Screen name="NoviBrod" component={NoviBrod} />
