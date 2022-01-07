@@ -32,7 +32,14 @@ export default function HomeRadnik({ route, navigation }: HomeProps) {
             <Text style={styles.shipsInfo}>Zaduženi brodovi</Text>
             <View style={styles.shipItemsContainer}>
                 {ships.map((ship) => (
-                    <TouchableOpacity key={ship.id} activeOpacity={0.9} style={styles.shipItem}>
+                    <TouchableOpacity
+                        key={ship.id}
+                        activeOpacity={0.9}
+                        style={styles.shipItem}
+                        onPress={() => {
+                            navigation.navigate("Brod", { id: ship.id });
+                        }}
+                    >
                         <Text numberOfLines={1} style={styles.shipItemName}>
                             {ship.name}
                         </Text>

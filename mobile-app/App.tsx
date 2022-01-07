@@ -17,7 +17,7 @@ export type RootStackParamList = {
     HomeRadnik: undefined;
     Brodovi: undefined;
     Brod: {
-        naziv: string;
+        id: number;
     };
     NoviBrod: undefined;
     Radnici: undefined;
