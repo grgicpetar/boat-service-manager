@@ -1,38 +1,44 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Fontisto, FontAwesome } from "@expo/vector-icons";
 import { RootStackParamList } from "../../App";
 import { useStore } from "../../store/zustand-store";
+import { UserShip } from "../../types";
 
 type HomeProps = NativeStackScreenProps<RootStackParamList, "HomeRadnik">;
 
 export default function HomeRadnik({ route, navigation }: HomeProps) {
+    const [ships, setShips] = useState<UserShip[]>([]);
     const user = useStore().user;
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(`http://192.168.1.2:3000/user_ship/${user?.username}`, {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const json = await response.json();
+            setShips(json);
+        };
+        fetchData();
+    }, []);
+
     return (
         <View style={styles.container}>
-            <Image style={styles.logo} source={require("../../assets/logo.png")} />
+            <Text style={styles.title}>Boat Manager</Text>
             <Text style={styles.username}>{user?.username} (radnik)</Text>
-            <TouchableOpacity
-                style={styles.menuButton}
-                activeOpacity={0.9}
-                onPress={() => {
-                    navigation.navigate("Brodovi");
-                }}
-            >
-                <Fontisto name="ship" size={24} color="#181A49" style={styles.menuButtonIcon} />
-                <Text style={styles.menuButtonText}>Brodovi</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.menuButton}
-                activeOpacity={0.9}
-                onPress={() => {
-                    navigation.navigate("Radnici");
-                }}
-            >
-                <FontAwesome name="group" size={24} color="#181A49" style={styles.menuButtonIcon} />
-                <Text style={styles.menuButtonText}>Radnici</Text>
-            </TouchableOpacity>
+            <Text style={styles.shipsInfo}>Zaduženi brodovi</Text>
+            <View style={styles.shipItemsContainer}>
+                {ships.map((ship) => (
+                    <TouchableOpacity key={ship.id} activeOpacity={0.9} style={styles.shipItem}>
+                        <Text numberOfLines={1} style={styles.shipItemName}>
+                            {ship.name}
+                        </Text>
+                    </TouchableOpacity>
+                ))}
+            </View>
         </View>
     );
 }
@@ -43,34 +49,43 @@ const styles = StyleSheet.create({
         backgroundColor: "#181A49",
         alignItems: "center",
     },
-    logo: {
-        width: 80,
-        height: 80,
+    title: {
         marginTop: "10%",
+        color: "#ECECEC",
+        fontSize: 22,
+        marginBottom: "4%",
     },
     username: {
         color: "#ECECEC",
         fontSize: 12,
-        marginBottom: "30%",
+        marginBottom: "20%",
     },
-    menuButton: {
+    shipsInfo: {
+        color: "#ECECEC",
+        fontSize: 12,
+        marginBottom: "10%",
+    },
+    shipItemsContainer: {
+        display: "flex",
+        flexWrap: "wrap",
         flexDirection: "row",
+        justifyContent: "space-around",
+    },
+    shipItem: {
         alignItems: "center",
-        backgroundColor: "#ECECEC",
-        paddingVertical: 15,
-        paddingHorizontal: 20,
+        paddingVertical: 5,
+        paddingHorizontal: 5,
         borderRadius: 10,
-        width: 200,
-        marginBottom: 50,
+        width: 150,
+        marginBottom: 20,
+        borderColor: "#ECECEC",
+        borderWidth: 1,
+        justifyContent: "center",
+        marginLeft: "2%",
+        marginRight: "2%",
     },
-    menuButtonIcon: {
-        marginRight: 10,
-    },
-    menuButtonText: {
-        textAlign: "center",
-        color: "#181A49",
-        textTransform: "uppercase",
-        fontWeight: "bold",
-        fontSize: 24,
+    shipItemName: {
+        color: "#ECECEC",
+        fontSize: 18,
     },
 });

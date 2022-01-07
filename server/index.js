@@ -74,7 +74,14 @@ app.get("/user_ship/:userName", async (req, res) => {
     const { userName } = req.params;
     try {
         const userShip = await pool.query(
-            `SELECT * FROM "boat-service-manager".user_ship WHERE user_name = '${userName}'`
+            `
+            select "boat-service-manager".ship.id, 
+            "boat-service-manager".ship.name
+            from "boat-service-manager".user_ship
+            inner join 
+            "boat-service-manager".ship on 
+            "boat-service-manager".ship.id = "boat-service-manager".user_ship.ship_id
+            where "boat-service-manager".user_ship.user_name = '${userName}'`
         );
 
         res.json(userShip.rows);
