@@ -59,7 +59,11 @@ app.get("/ship/:id", async (req, res) => {
     try {
         const ship = await pool.query(`SELECT * FROM "boat-service-manager".ship WHERE id = '${id}'`);
 
-        res.json(ship.rows[0]);
+        if (ship.rows.length === 0) {
+            res.sendStatus(404);
+        } else {
+            res.json(ship.rows[0]);
+        }
     } catch (error) {
         console.error(error);
     }
@@ -105,7 +109,6 @@ app.get("/record/ship/:ship", async (req, res) => {
 });
 
 //LOGIN
-
 app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     try {
