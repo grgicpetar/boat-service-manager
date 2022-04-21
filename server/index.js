@@ -69,6 +69,18 @@ app.get("/ship/:id", async (req, res) => {
     }
 });
 
+app.post("/ship", async (req, res) => {
+    const { name, description } = req.body;
+    try {
+        const ship = await pool.query(`INSERT INTO "boat-service-manager".ship(name, description)
+        VALUES ('${name}', '${description}');`);
+
+        res.json(ship);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 //USER_SHIP
 app.get("/user_ship/:userName", async (req, res) => {
     const { userName } = req.params;

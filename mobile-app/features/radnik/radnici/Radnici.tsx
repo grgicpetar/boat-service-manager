@@ -9,7 +9,7 @@ import { User } from "../../../types";
 type RadniciProps = NativeStackScreenProps<RootStackParamList, "Radnici">;
 
 export default function Radnici({ navigation }: RadniciProps) {
-    const [workers, setWorkers] = useState<User[]>();
+    const [radnici, setRadnici] = useState<User[]>();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,7 +21,7 @@ export default function Radnici({ navigation }: RadniciProps) {
             });
             const json = await response.json();
 
-            setWorkers(json.filter((user: any) => user.role === 2));
+            setRadnici(json.filter((user: any) => user.role === 2));
         };
         fetchData();
     }, []);
@@ -34,7 +34,7 @@ export default function Radnici({ navigation }: RadniciProps) {
             </View>
             <FlatList
                 style={styles.listaRadnika}
-                data={workers}
+                data={radnici}
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         key={item.name}

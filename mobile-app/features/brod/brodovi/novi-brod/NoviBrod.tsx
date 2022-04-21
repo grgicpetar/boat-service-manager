@@ -2,17 +2,28 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Platform, Button, Image, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { ScrollView } from "react-native-gesture-handler";
-
-const radniciMock = [
-    { naziv: "Radnik 1", key: "1" },
-    { naziv: "Radnik 2", key: "2" },
-    { naziv: "Radnik 3", key: "3" },
-];
+import { User } from "../../../../types";
 
 export default function NoviBrod() {
     const [nazivBroda, setNazivBroda] = useState<string>("");
     const [dodatneInfo, setDodatneInfo] = useState<string>("");
     const [zaduzeniRadniciKeys, setZaduzeniRadniciKeys] = useState<string[]>([]);
+    const [radnici, setRadnici] = useState<User[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(`http://192.168.1.6:3000/user`, {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const json = await response.json();
+
+            setRadnici(json.filter((user: any) => user.role === 2));
+        };
+        fetchData();
+    }, []);
 
     function toggleRadnik(radnikKey: string) {
         if (!zaduzeniRadniciKeys.find((zaduzeniRadnikKey) => zaduzeniRadnikKey === radnikKey)) {
@@ -66,23 +77,23 @@ export default function NoviBrod() {
                 </View>
                 <Text style={styles.zaduziRadnike}>Zaduži radnike</Text>
                 <View style={styles.radniciContainer}>
-                    {radniciMock.map((radnik, i) => (
+                    {radnici.map((radnik, i) => (
                         <TouchableOpacity
                             activeOpacity={0.9}
                             style={[
                                 styles.radnik,
                                 {
                                     backgroundColor: zaduzeniRadniciKeys.find(
-                                        (zaduzeniRadnikKey) => zaduzeniRadnikKey === radnik.key
+                                        (zaduzeniRadnikKey) => zaduzeniRadnikKey === radnik.name
                                     )
                                         ? "#9bc8ee"
                                         : "#ECECEC",
                                 },
                             ]}
                             key={i}
-                            onPress={() => toggleRadnik(radnik.key)}
+                            onPress={() => toggleRadnik(radnik.name)}
                         >
-                            <Text style={styles.radnikNaziv}>{radnik.naziv}</Text>
+                            <Text style={styles.radnikNaziv}>{radnik.name}</Text>
                         </TouchableOpacity>
                     ))}
                 </View>
