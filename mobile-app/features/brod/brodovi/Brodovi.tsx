@@ -5,9 +5,9 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../App";
 
 const brodoviMock = [
-    { naziv: "Brod 1", key: "1" },
-    { naziv: "Brod 2", key: "2" },
-    { naziv: "Brod 3", key: "3" },
+    { naziv: "Brod 1", id: 4 },
+    { naziv: "Brod 2", id: 4 },
+    { naziv: "Brod 3", id: 4 },
 ];
 
 type BrodoviProps = NativeStackScreenProps<RootStackParamList, "Brodovi">;
@@ -26,7 +26,7 @@ export default function Brodovi({ navigation }: BrodoviProps) {
                     <TouchableOpacity
                         style={styles.listaBrodovaItem}
                         activeOpacity={0.9}
-                        onPress={() => navigation.navigate("Brod", { naziv: item.naziv })}
+                        onPress={() => navigation.navigate("Brod", { id: item.id })}
                     >
                         <Text style={styles.listaBrodovaItemText}>{item.naziv}</Text>
                     </TouchableOpacity>

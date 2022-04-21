@@ -13,7 +13,7 @@ export default function HomeRadnik({ route, navigation }: HomeProps) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://192.168.1.2:3000/user_ship/${user?.username}`, {
+            const response = await fetch(`http://192.168.1.6:3000/user_ship/${user?.username}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
