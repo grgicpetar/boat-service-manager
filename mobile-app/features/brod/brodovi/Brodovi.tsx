@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { Fontisto, AntDesign } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../App";
 
-const brodoviMock = [
-    { naziv: "Brod 1", id: 4 },
-    { naziv: "Brod 2", id: 4 },
-    { naziv: "Brod 3", id: 4 },
-];
+import { Ship } from "../../../types";
 
 type BrodoviProps = NativeStackScreenProps<RootStackParamList, "Brodovi">;
 
 export default function Brodovi({ navigation }: BrodoviProps) {
+    const [ships, setShips] = useState<Ship[]>();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(`http://192.168.1.6:3000/ship`, {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const json = await response.json();
+            setShips(json);
+        };
+        fetchData();
+    }, []);
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -21,14 +33,14 @@ export default function Brodovi({ navigation }: BrodoviProps) {
             </View>
             <FlatList
                 style={styles.listaBrodova}
-                data={brodoviMock}
+                data={ships}
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         style={styles.listaBrodovaItem}
                         activeOpacity={0.9}
                         onPress={() => navigation.navigate("Brod", { id: item.id })}
                     >
-                        <Text style={styles.listaBrodovaItemText}>{item.naziv}</Text>
+                        <Text style={styles.listaBrodovaItemText}>{item.name}</Text>
                     </TouchableOpacity>
                 )}
             />
