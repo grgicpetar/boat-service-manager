@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../App";
+import { User } from "../../../types";
 
-const radniciMock = [
-    { naziv: "Radnik 1", key: "1" },
-    { naziv: "Radnik 2", key: "2" },
-    { naziv: "Radnik 3", key: "3" },
-];
+type RadniciProps = NativeStackScreenProps<RootStackParamList, "Radnici">;
 
-type BrodoviProps = NativeStackScreenProps<RootStackParamList, "Brodovi">;
+export default function Radnici({ navigation }: RadniciProps) {
+    const [workers, setWorkers] = useState<User[]>();
 
-export default function Brodovi({ navigation }: BrodoviProps) {
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(`http://192.168.1.6:3000/user`, {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const json = await response.json();
+
+            setWorkers(json.filter((user: any) => user.role === 2));
+        };
+        fetchData();
+    }, []);
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -22,14 +34,15 @@ export default function Brodovi({ navigation }: BrodoviProps) {
             </View>
             <FlatList
                 style={styles.listaRadnika}
-                data={radniciMock}
+                data={workers}
                 renderItem={({ item }) => (
                     <TouchableOpacity
+                        key={item.name}
                         style={styles.listaRadnikaItem}
                         activeOpacity={0.9}
-                        onPress={() => navigation.navigate("Radnik", { imeRadnika: item.naziv })}
+                        onPress={() => navigation.navigate("Radnik", { imeRadnika: item.name })}
                     >
-                        <Text style={styles.listaRadnikaItemText}>{item.naziv}</Text>
+                        <Text style={styles.listaRadnikaItemText}>{item.name}</Text>
                     </TouchableOpacity>
                 )}
             />

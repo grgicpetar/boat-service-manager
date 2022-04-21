@@ -37,7 +37,7 @@ export default function Login({ navigation }: PrijavaProps) {
             const json = await response.json();
             let user = json[0];
             setUser({
-                username: user.name,
+                name: user.name,
                 role: user.role,
             });
             if (user.role === 1) {

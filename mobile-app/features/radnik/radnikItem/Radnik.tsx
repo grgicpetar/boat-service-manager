@@ -1,10 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Zapisi from "../../zapis/zapisi/Zapisi";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../App";
+import { Ship } from "../../../types";
 
 const brodoviMock = [
     { naziv: "Brod 1", key: "1" },
@@ -15,20 +16,37 @@ const brodoviMock = [
 type RadnikProps = NativeStackScreenProps<RootStackParamList, "Radnik">;
 
 export default function Radnik({ route, navigation }: RadnikProps) {
+    const [ships, setShips] = useState<Ship[]>([]);
+    const username = route.params.imeRadnika;
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(`http://192.168.1.6:3000/user_ship/${username}`, {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+            const json = await response.json();
+            setShips(json);
+        };
+        fetchData();
+    }, []);
+
     return (
         <View style={styles.container}>
             <Text style={styles.imeRadnika}>{route.params.imeRadnika}</Text>
             <Text style={styles.trenutnoZaduzen}>Trenutno zadužen za brodove:</Text>
             <View style={styles.brodoviContainer}>
-                {brodoviMock.map((brod, i) => (
+                {ships.map((item, i) => (
                     <TouchableOpacity
                         key={i}
                         style={styles.brodItem}
                         onPress={() => {
-                            navigation.navigate("Brod", { naziv: brod.naziv });
+                            navigation.navigate("Brod", { id: item.id });
                         }}
                     >
-                        <Text style={styles.brodItemText}>{brod.naziv}</Text>
+                        <Text style={styles.brodItemText}>{item.name}</Text>
                     </TouchableOpacity>
                 ))}
             </View>
