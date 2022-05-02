@@ -102,6 +102,25 @@ app.get("/user_ship/:userName", async (req, res) => {
     }
 });
 
+app.get("/user_ship/workers/:shipId", async (req, res) => {
+    const { shipId } = req.params;
+    try {
+        const userShip = await pool.query(
+            `
+            select "boat-service-manager".user.name
+			from "boat-service-manager".user_ship
+            inner join 
+            "boat-service-manager".user on 
+            "boat-service-manager".user.name = "boat-service-manager".user_ship.user_name
+            where "boat-service-manager".user_ship.ship_id =${shipId}`
+        );
+
+        res.json(userShip.rows);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 //RECORDS
 app.get("/record/user/:userName", async (req, res) => {
     const { userName } = req.params;
