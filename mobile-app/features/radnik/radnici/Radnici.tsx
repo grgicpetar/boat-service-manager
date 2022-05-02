@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../App";
 import { User } from "../../../types";
@@ -10,6 +10,7 @@ type RadniciProps = NativeStackScreenProps<RootStackParamList, "Radnici">;
 
 export default function Radnici({ navigation }: RadniciProps) {
     const [radnici, setRadnici] = useState<User[]>();
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,8 +24,10 @@ export default function Radnici({ navigation }: RadniciProps) {
 
             setRadnici(json.filter((user: any) => user.role === 2));
         };
-        fetchData();
-    }, []);
+        if (isFocused) {
+            fetchData();
+        }
+    }, [isFocused]);
 
     return (
         <View style={styles.container}>

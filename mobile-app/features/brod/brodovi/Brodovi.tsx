@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { Fontisto, AntDesign } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../App";
 
@@ -10,6 +11,7 @@ type BrodoviProps = NativeStackScreenProps<RootStackParamList, "Brodovi">;
 
 export default function Brodovi({ navigation }: BrodoviProps) {
     const [ships, setShips] = useState<Ship[]>();
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,8 +24,10 @@ export default function Brodovi({ navigation }: BrodoviProps) {
             const json = await response.json();
             setShips(json);
         };
-        fetchData();
-    }, []);
+        if (isFocused) {
+            fetchData();
+        }
+    }, [isFocused]);
 
     return (
         <View style={styles.container}>

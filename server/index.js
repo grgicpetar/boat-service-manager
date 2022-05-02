@@ -32,10 +32,10 @@ app.get("/user/:name", async (req, res) => {
 });
 
 app.post("/user", async (req, res) => {
-    const { name, password } = req.body;
+    const { name } = req.body;
     try {
         const user = await pool.query(`INSERT INTO "boat-service-manager".user(name, password, role)
-        VALUES ('${name}','${password}' 2);`);
+        VALUES ('${name}','${name}', 2);`);
 
         res.json(user);
     } catch (error) {

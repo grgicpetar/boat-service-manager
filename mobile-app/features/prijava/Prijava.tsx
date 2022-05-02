@@ -22,7 +22,6 @@ export default function Login({ navigation }: PrijavaProps) {
     }, [isFocused]);
 
     const handleLogin = async () => {
-        console.log(username, password);
         try {
             const response = await fetch("http://192.168.0.16:3000/login", {
                 method: "post",
