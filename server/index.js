@@ -73,9 +73,9 @@ app.post("/ship", async (req, res) => {
     const { name, description } = req.body;
     try {
         const ship = await pool.query(`INSERT INTO "boat-service-manager".ship(name, description)
-        VALUES ('${name}', '${description}');`);
+        VALUES ('${name}', '${description}') RETURNING *`);
 
-        res.json(ship);
+        res.json(ship.rows[0]);
     } catch (error) {
         console.error(error);
     }

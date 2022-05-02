@@ -1,45 +1,48 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Platform, Button, Image, Alert } from "react-native";
-import * as ImagePicker from "expo-image-picker";
+import {
+    View,
+    Text,
+    StyleSheet,
+    TextInput,
+    TouchableOpacity,
+    Platform,
+    Button,
+    Image,
+    Alert,
+    ToastAndroid,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { User } from "../../../../types";
+import { RootStackParamList } from "../../../../App";
 
-export default function NoviBrod() {
+type NoviBrodProps = NativeStackScreenProps<RootStackParamList, "NoviBrod">;
+
+export default function NoviBrod({ navigation }: NoviBrodProps) {
     const [nazivBroda, setNazivBroda] = useState<string>("");
     const [dodatneInfo, setDodatneInfo] = useState<string>("");
-    const [zaduzeniRadniciKeys, setZaduzeniRadniciKeys] = useState<string[]>([]);
-    const [radnici, setRadnici] = useState<User[]>([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(`http://192.168.0.16:3000/user`, {
-                method: "get",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-            const json = await response.json();
-
-            setRadnici(json.filter((user: any) => user.role === 2));
-        };
-        fetchData();
-    }, []);
-
-    function toggleRadnik(radnikKey: string) {
-        if (!zaduzeniRadniciKeys.find((zaduzeniRadnikKey) => zaduzeniRadnikKey === radnikKey)) {
-            setZaduzeniRadniciKeys((old) => [...old, radnikKey]);
-        } else {
-            const filtriraniRadnici = zaduzeniRadniciKeys.filter(
-                (zaduzeniRadnikKey) => zaduzeniRadnikKey !== radnikKey
-            );
-            setZaduzeniRadniciKeys(filtriraniRadnici);
-        }
-    }
-
-    function submitBrod() {
+    async function submitBrod() {
         const brodIsValid = validateBrod();
         if (brodIsValid === "valid") {
-            Alert.alert("Novi brod", "Uspješno dodan novi brod!");
+            try {
+                const response = await fetch("http://192.168.0.16:3000/ship", {
+                    method: "post",
+                    body: JSON.stringify({
+                        name: nazivBroda,
+                        description: dodatneInfo,
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+                const json = await response.json();
+
+                navigation.navigate("Brod", { id: json.id });
+
+                Alert.alert("Novi brod", "Uspješno dodan novi brod!");
+            } catch (error) {
+                ToastAndroid.show("Nešto je pošlo po krivu", ToastAndroid.SHORT);
+            }
         } else {
             Alert.alert("Novi brod", brodIsValid);
         }
@@ -74,28 +77,6 @@ export default function NoviBrod() {
                         placeholderTextColor={"rgba(236, 236, 236, 0.3)"}
                         onChangeText={(text) => setDodatneInfo(text)}
                     ></TextInput>
-                </View>
-                <Text style={styles.zaduziRadnike}>Zaduži radnike</Text>
-                <View style={styles.radniciContainer}>
-                    {radnici.map((radnik, i) => (
-                        <TouchableOpacity
-                            activeOpacity={0.9}
-                            style={[
-                                styles.radnik,
-                                {
-                                    backgroundColor: zaduzeniRadniciKeys.find(
-                                        (zaduzeniRadnikKey) => zaduzeniRadnikKey === radnik.name
-                                    )
-                                        ? "#9bc8ee"
-                                        : "#ECECEC",
-                                },
-                            ]}
-                            key={i}
-                            onPress={() => toggleRadnik(radnik.name)}
-                        >
-                            <Text style={styles.radnikNaziv}>{radnik.name}</Text>
-                        </TouchableOpacity>
-                    ))}
                 </View>
                 <TouchableOpacity
                     style={styles.spremiButton}

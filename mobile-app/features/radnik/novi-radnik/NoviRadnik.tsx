@@ -9,7 +9,7 @@ const brodovi = [
     { naziv: "Brod 3", key: "3" },
 ];
 
-type NoviRadnikProps = NativeStackScreenProps<RootStackParamList, "Radnik">;
+type NoviRadnikProps = NativeStackScreenProps<RootStackParamList, "NoviRadnik">;
 
 export default function NoviRadnik({ navigation }: NoviRadnikProps) {
     const [name, setName] = useState<string>("");
@@ -33,7 +33,7 @@ export default function NoviRadnik({ navigation }: NoviRadnikProps) {
 
                 Alert.alert("Novi radnik", "Uspješno dodan novi radnik!");
             } catch (error) {
-                ToastAndroid.show("Krivo korisničko ime ili lozinka", ToastAndroid.SHORT);
+                ToastAndroid.show("Nešto je pošlo po krivu", ToastAndroid.SHORT);
             }
         } else {
             Alert.alert("Novi radnik", radnikIsValid);
