@@ -13,7 +13,7 @@ export default function HomeRadnik({ route, navigation }: HomeProps) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://192.168.1.6:3000/user_ship/${user?.username}`, {
+            const response = await fetch(`http://192.168.0.16:3000/user_ship/${user?.name}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export default function HomeRadnik({ route, navigation }: HomeProps) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Boat Manager</Text>
-            <Text style={styles.username}>{user?.username} (radnik)</Text>
+            <Text style={styles.username}>{user?.name} (radnik)</Text>
             <Text style={styles.shipsInfo}>Zaduženi brodovi</Text>
             <View style={styles.shipItemsContainer}>
                 {ships.map((ship) => (

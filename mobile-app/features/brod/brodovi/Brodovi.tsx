@@ -13,7 +13,7 @@ export default function Brodovi({ navigation }: BrodoviProps) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://192.168.1.6:3000/ship`, {
+            const response = await fetch(`http://192.168.0.16:3000/ship`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",

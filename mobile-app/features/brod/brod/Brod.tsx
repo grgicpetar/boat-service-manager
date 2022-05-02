@@ -13,7 +13,7 @@ export default function Brod({ route }: BrodProps) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://192.168.1.6:3000/ship/${shipId}`, {
+            const response = await fetch(`http://192.168.0.16:3000/ship/${shipId}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",

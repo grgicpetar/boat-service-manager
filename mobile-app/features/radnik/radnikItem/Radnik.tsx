@@ -21,7 +21,7 @@ export default function Radnik({ route, navigation }: RadnikProps) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://192.168.1.6:3000/user_ship/${username}`, {
+            const response = await fetch(`http://192.168.0.16:3000/user_ship/${username}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",

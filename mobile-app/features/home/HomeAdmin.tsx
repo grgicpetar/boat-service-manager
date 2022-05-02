@@ -12,7 +12,7 @@ export default function HomeAdmin({ route, navigation }: HomeProps) {
     return (
         <View style={styles.container}>
             <Image style={styles.logo} source={require("../../assets/logo.png")} />
-            <Text style={styles.username}>{user?.username} (administrator)</Text>
+            <Text style={styles.username}>{user?.name} (administrator)</Text>
             <TouchableOpacity
                 style={styles.menuButton}
                 activeOpacity={0.9}
