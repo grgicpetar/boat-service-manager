@@ -64,7 +64,11 @@ export default function Brod({ route, navigation }: BrodProps) {
                     </View>
                     <TouchableOpacity
                         onPress={() => {
-                            navigation.navigate("ZaduziRadnike", { brodId: shipId });
+                            navigation.navigate("ZaduziRadnike", {
+                                brodId: shipId,
+                                imeBroda: ship.name,
+                                zaduzeniRadnici: workers.map((worker) => worker.name),
+                            });
                         }}
                     >
                         <Text style={styles.zaduziRadnikeButton}>Zaduži radnike</Text>

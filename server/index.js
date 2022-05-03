@@ -121,6 +121,24 @@ app.get("/user_ship/workers/:shipId", async (req, res) => {
     }
 });
 
+app.post("/user_ship", async (req, res) => {
+    const { shipId, workerNames } = req.body;
+    const values = workerNames.map((name) => `('${name}', ${shipId})`).join();
+
+    const query = `DELETE FROM "boat-service-manager".user_ship
+	WHERE ship_id = ${shipId};
+    INSERT INTO "boat-service-manager".user_ship(
+        user_name, ship_id) VALUES ${values} RETURNING * `;
+
+    try {
+        const user_ship = await pool.query(query);
+
+        res.json(user_ship);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 //RECORDS
 app.get("/record/user/:userName", async (req, res) => {
     const { userName } = req.params;

@@ -28,6 +28,8 @@ export type RootStackParamList = {
     NoviRadnik: undefined;
     ZaduziRadnike: {
         brodId: number;
+        imeBroda: string;
+        zaduzeniRadnici: string[];
     };
 };
 
