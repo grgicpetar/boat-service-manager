@@ -62,6 +62,13 @@ export default function Brod({ route, navigation }: BrodProps) {
                             </TouchableOpacity>
                         ))}
                     </View>
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate("ZaduziRadnike", { brodId: shipId });
+                        }}
+                    >
+                        <Text style={styles.zaduziRadnikeButton}>Zaduži radnike</Text>
+                    </TouchableOpacity>
                     <Zapisi />
                 </>
             ) : (
@@ -126,5 +133,10 @@ const styles = StyleSheet.create({
     radniciItemText: {
         color: "#ECECEC",
         textAlign: "center",
+    },
+    zaduziRadnikeButton: {
+        color: "#2272B4",
+        fontSize: 12,
+        marginTop: 5,
     },
 });

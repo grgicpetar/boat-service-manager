@@ -10,6 +10,7 @@ import Brod from "./features/brod/brod/Brod";
 import NoviBrod from "./features/brod/brodovi/novi-brod/NoviBrod";
 import Radnik from "./features/radnik/radnikItem/Radnik";
 import NoviRadnik from "./features/radnik/novi-radnik/NoviRadnik";
+import ZaduziRadnike from "./features/brod/zaduzi-radnike/ZaduziRadnike";
 
 export type RootStackParamList = {
     Login: undefined;
@@ -25,6 +26,9 @@ export type RootStackParamList = {
         imeRadnika: string;
     };
     NoviRadnik: undefined;
+    ZaduziRadnike: {
+        brodId: number;
+    };
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -42,6 +46,7 @@ export default function App() {
                 <RootStack.Screen name="Radnici" component={Radnici} />
                 <RootStack.Screen name="Radnik" component={Radnik} />
                 <RootStack.Screen name="NoviRadnik" component={NoviRadnik} />
+                <RootStack.Screen name="ZaduziRadnike" component={ZaduziRadnike} />
             </RootStack.Navigator>
         </NavigationContainer>
     );
