@@ -153,10 +153,10 @@ app.get("/record/user/:userName", async (req, res) => {
     }
 });
 
-app.get("/record/ship/:ship", async (req, res) => {
-    const { ship } = req.params;
+app.get("/record/ship/:shipId", async (req, res) => {
+    const { shipId } = req.params;
     try {
-        const records = await pool.query(`SELECT * FROM "boat-service-manager".record WHERE ship = '${ship}'  `);
+        const records = await pool.query(`SELECT * FROM "boat-service-manager".record WHERE ship = '${shipId}'  `);
 
         res.json(records.rows);
     } catch (error) {

@@ -1,17 +1,9 @@
-import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Zapisi from "../../zapis/zapisi/Zapisi";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../App";
 import { Ship } from "../../../types";
-
-const brodoviMock = [
-    { naziv: "Brod 1", key: "1" },
-    { naziv: "Brod 2", key: "2" },
-    { naziv: "Brod 3", key: "3" },
-];
 
 type RadnikProps = NativeStackScreenProps<RootStackParamList, "Radnik">;
 
@@ -50,7 +42,6 @@ export default function Radnik({ route, navigation }: RadnikProps) {
                     </TouchableOpacity>
                 ))}
             </View>
-            <Zapisi />
         </View>
     );
 }

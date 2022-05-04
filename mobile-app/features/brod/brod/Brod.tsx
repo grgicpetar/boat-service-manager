@@ -2,15 +2,16 @@ import { StackScreenProps } from "@react-navigation/stack";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { RootStackParamList } from "../../../App";
-import { Ship, User } from "../../../types";
+import { Ship, User, Zapis } from "../../../types";
 import { useIsFocused } from "@react-navigation/native";
-import Zapisi from "../../zapis/zapisi/Zapisi";
+import Zapisi from "../../zapis/zapisi/ZapisiList";
 
 type BrodProps = StackScreenProps<RootStackParamList, "Brod">;
 
 export default function Brod({ route, navigation }: BrodProps) {
     const [ship, setShip] = useState<Ship>();
     const [workers, setWorkers] = useState<User[]>([]);
+
     const shipId = route.params.id;
     const isFocused = useIsFocused();
 
@@ -31,13 +32,12 @@ export default function Brod({ route, navigation }: BrodProps) {
                     "Content-Type": "application/json",
                 },
             });
-
             const jsonWorkers = await responseWorkers.json();
             setWorkers(jsonWorkers);
         };
         if (isFocused) {
+            fetchData();
         }
-        fetchData();
     }, [shipId, isFocused]);
 
     return (
@@ -73,7 +73,7 @@ export default function Brod({ route, navigation }: BrodProps) {
                     >
                         <Text style={styles.zaduziRadnikeButton}>Zaduži radnike</Text>
                     </TouchableOpacity>
-                    <Zapisi />
+                    <Zapisi isShort={true} shipId={shipId} />
                 </>
             ) : (
                 <View>

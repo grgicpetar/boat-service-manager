@@ -13,3 +13,10 @@ export type Ship = {
     name: string;
     description: string;
 };
+
+export type Zapis = {
+    id: number;
+    ship: number;
+    user_name: string;
+    text: string;
+};
