@@ -2,20 +2,16 @@ import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Zapis } from "../../../types";
-import { useIsFocused } from "@react-navigation/native";
-
-const zapisiMock = [
-    { naziv: "Zapis 1", key: "1", radnikNaziv: "Radnik 1" },
-    { naziv: "Zapis 2", key: "2", radnikNaziv: "Radnik 2" },
-    { naziv: "Zapis 3", key: "3", radnikNaziv: "Radnik 3" },
-];
+import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../../App";
 
 type ZapisiProps = {
-    isShort: boolean;
     shipId: number;
+    navigation: StackNavigationProp<RootStackParamList, "Brod">;
 };
 
-export default function ZapisiList({ isShort, shipId }: ZapisiProps) {
+export default function ZapisiList({ shipId, navigation }: ZapisiProps) {
     const [zapisi, setZapisi] = useState<Zapis[]>([]);
     const isFocused = useIsFocused();
 
@@ -37,7 +33,7 @@ export default function ZapisiList({ isShort, shipId }: ZapisiProps) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity activeOpacity={0.9}>
+            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate("NoviZapis", { brodId: shipId })}>
                 <AntDesign name="pluscircleo" size={32} color="#ECECEC" />
             </TouchableOpacity>
             <FlatList

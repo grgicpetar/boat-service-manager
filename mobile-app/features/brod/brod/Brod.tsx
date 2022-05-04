@@ -73,7 +73,7 @@ export default function Brod({ route, navigation }: BrodProps) {
                     >
                         <Text style={styles.zaduziRadnikeButton}>Zaduži radnike</Text>
                     </TouchableOpacity>
-                    <Zapisi isShort={true} shipId={shipId} />
+                    <Zapisi shipId={shipId} navigation={navigation} />
                 </>
             ) : (
                 <View>
