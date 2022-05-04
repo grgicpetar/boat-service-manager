@@ -8,10 +8,11 @@ import { RootStackParamList } from "../../../App";
 
 type ZapisiProps = {
     shipId: number;
+    shipName: string;
     navigation: StackNavigationProp<RootStackParamList, "Brod">;
 };
 
-export default function ZapisiList({ shipId, navigation }: ZapisiProps) {
+export default function ZapisiList({ shipId, navigation, shipName }: ZapisiProps) {
     const [zapisi, setZapisi] = useState<Zapis[]>([]);
     const isFocused = useIsFocused();
 
@@ -33,7 +34,10 @@ export default function ZapisiList({ shipId, navigation }: ZapisiProps) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate("NoviZapis", { brodId: shipId })}>
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => navigation.navigate("NoviZapis", { brodId: shipId, shipName })}
+            >
                 <AntDesign name="pluscircleo" size={32} color="#ECECEC" />
             </TouchableOpacity>
             <FlatList

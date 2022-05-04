@@ -139,7 +139,6 @@ app.post("/user_ship", async (req, res) => {
     }
 });
 
-//RECORDS
 app.get("/record/user/:userName", async (req, res) => {
     const { userName } = req.params;
     try {
@@ -153,12 +152,29 @@ app.get("/record/user/:userName", async (req, res) => {
     }
 });
 
+//RECORDS
 app.get("/record/ship/:shipId", async (req, res) => {
     const { shipId } = req.params;
     try {
         const records = await pool.query(`SELECT * FROM "boat-service-manager".record WHERE ship = '${shipId}'  `);
 
         res.json(records.rows);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+app.post("/record", async (req, res) => {
+    const { shipId, user_name, text } = req.body;
+
+    const query = `INSERT INTO "boat-service-manager".record(
+        ship, text, user_name)
+       VALUES (${shipId}, '${text}', '${user_name}');`;
+
+    try {
+        const record = await pool.query(query);
+
+        res.json(record);
     } catch (error) {
         console.error(error);
     }

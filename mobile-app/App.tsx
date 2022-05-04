@@ -34,6 +34,7 @@ export type RootStackParamList = {
     };
     NoviZapis: {
         brodId: number;
+        shipName: string;
     };
 };
 
