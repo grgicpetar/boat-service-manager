@@ -5,12 +5,14 @@ import { RootStackParamList } from "../../../App";
 import { Ship, User, Zapis } from "../../../types";
 import { useIsFocused } from "@react-navigation/native";
 import Zapisi from "../../zapis/zapisi/ZapisiList";
+import { useStore } from "../../../store/zustand-store";
 
 type BrodProps = StackScreenProps<RootStackParamList, "Brod">;
 
 export default function Brod({ route, navigation }: BrodProps) {
     const [ship, setShip] = useState<Ship>();
     const [workers, setWorkers] = useState<User[]>([]);
+    const { user } = useStore();
 
     const shipId = route.params.id;
     const isFocused = useIsFocused();
@@ -62,17 +64,19 @@ export default function Brod({ route, navigation }: BrodProps) {
                             </TouchableOpacity>
                         ))}
                     </View>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigation.navigate("ZaduziRadnike", {
-                                brodId: shipId,
-                                imeBroda: ship.name,
-                                zaduzeniRadnici: workers.map((worker) => worker.name),
-                            });
-                        }}
-                    >
-                        <Text style={styles.zaduziRadnikeButton}>Zaduži radnike</Text>
-                    </TouchableOpacity>
+                    {user?.role === 1 ? (
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigation.navigate("ZaduziRadnike", {
+                                    brodId: shipId,
+                                    imeBroda: ship.name,
+                                    zaduzeniRadnici: workers.map((worker) => worker.name),
+                                });
+                            }}
+                        >
+                            <Text style={styles.zaduziRadnikeButton}>Zaduži radnike</Text>
+                        </TouchableOpacity>
+                    ) : null}
                     <Zapisi shipId={shipId} navigation={navigation} shipName={ship.name} />
                 </>
             ) : (
