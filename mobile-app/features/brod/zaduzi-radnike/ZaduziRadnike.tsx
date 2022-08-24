@@ -15,7 +15,7 @@ export default function ZaduziRadnike({ route, navigation }: ZaduziZadnikeProps)
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://192.168.0.16:3000/user`, {
+            const response = await fetch(`http://192.168.1.10:3000/user`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export default function ZaduziRadnike({ route, navigation }: ZaduziZadnikeProps)
 
     async function spremi() {
         try {
-            await fetch("http://192.168.0.16:3000/user_ship", {
+            await fetch("http://192.168.1.10:3000/user_ship", {
                 method: "post",
                 body: JSON.stringify({
                     shipId: brodId,
@@ -61,8 +61,8 @@ export default function ZaduziRadnike({ route, navigation }: ZaduziZadnikeProps)
 
     return (
         <View style={styles.container}>
-            <Text>{imeBroda}</Text>
-            <Text>Zaduzi radnike</Text>
+            <Text style={styles.title}>{imeBroda}</Text>
+            <Text style={styles.subtitle}>Zaduži radnike</Text>
             <View style={styles.radniciContainer}>
                 {radnici.map((radnik, i) => (
                     <TouchableOpacity
@@ -109,6 +109,15 @@ const styles = StyleSheet.create({
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 32,
+        marginTop: "10%",
+        marginBottom: 10,
+    },
+    subtitle: {
+        textAlign: "center",
+        color: "#ECECEC",
+        textTransform: "uppercase",
+        fontWeight: "bold",
+        fontSize: 22,
         marginTop: "10%",
         marginBottom: 10,
     },

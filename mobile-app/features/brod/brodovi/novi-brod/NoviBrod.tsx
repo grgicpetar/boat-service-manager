@@ -25,7 +25,7 @@ export default function NoviBrod({ navigation }: NoviBrodProps) {
         const brodIsValid = validateBrod();
         if (brodIsValid === "valid") {
             try {
-                const response = await fetch("http://192.168.0.16:3000/ship", {
+                const response = await fetch("http://192.168.1.10:3000/ship", {
                     method: "post",
                     body: JSON.stringify({
                         name: nazivBroda,
@@ -59,7 +59,7 @@ export default function NoviBrod({ navigation }: NoviBrodProps) {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={{ alignItems: "center" }}>
-                <Text style={styles.title}>Dodaj novi brod</Text>
+                <Text style={styles.title}>Novi brod</Text>
                 <View style={styles.inputContainer}>
                     <TextInput
                         style={styles.input}
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         color: "#ECECEC",
         textTransform: "uppercase",
         fontWeight: "bold",
-        fontSize: 32,
+        fontSize: 24,
         marginTop: "10%",
         marginBottom: 10,
     },
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     input: {
         color: "#ECECEC",
         textAlign: "center",
-        borderBottomColor: "#ECECEC",
+        borderBottomColor: "#414496",
         borderBottomWidth: 1,
         borderRadius: 10,
         fontSize: 20,
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
     brodInfoContainer: {
-        borderColor: "#ECECEC",
+        borderColor: "#414496",
         borderWidth: 1,
         width: "80%",
         borderRadius: 10,
@@ -158,15 +158,16 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     spremiButton: {
-        backgroundColor: "#ECECEC",
-        padding: 10,
+        backgroundColor: "#414496",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
         borderRadius: 10,
         marginTop: 20,
         marginBottom: 10,
     },
     spremiButtonText: {
         textAlign: "center",
-        color: "#181A49",
+        color: "#ECECEC",
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16,

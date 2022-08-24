@@ -14,7 +14,7 @@ export default function Radnici({ navigation }: RadniciProps) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://192.168.0.16:3000/user`, {
+            const response = await fetch(`http://192.168.1.10:3000/user`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         color: "#ECECEC",
         textTransform: "uppercase",
         fontWeight: "bold",
-        fontSize: 32,
+        fontSize: 24,
     },
     listaRadnika: {
         marginTop: 50,
@@ -83,14 +83,14 @@ const styles = StyleSheet.create({
         flexGrow: 0,
     },
     listaRadnikaItem: {
-        backgroundColor: "#ECECEC",
-        marginBottom: 10,
+        backgroundColor: "#414496",
+        marginBottom: 20,
         paddingVertical: 10,
         borderRadius: 10,
     },
     listaRadnikaItemText: {
         textAlign: "center",
-        color: "#181A49",
+        color: "#ECECEC",
         fontSize: 20,
     },
 });

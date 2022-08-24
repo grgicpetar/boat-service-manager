@@ -16,7 +16,7 @@ export default function NoviZapis({ route, navigation }: NoviZapisProps) {
         const isValid = validateRecord();
         if (isValid === "valid") {
             try {
-                const response = await fetch("http://192.168.0.16:3000/record", {
+                const response = await fetch("http://192.168.1.10:3000/record", {
                     method: "post",
                     body: JSON.stringify({
                         shipId: brodId,
@@ -50,6 +50,8 @@ export default function NoviZapis({ route, navigation }: NoviZapisProps) {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.title}>Unos zapisa</Text>
+            <Text style={styles.subtitle}>{shipName}</Text>
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
@@ -75,10 +77,27 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 20,
     },
-
+    title: {
+        textAlign: "center",
+        color: "#ECECEC",
+        textTransform: "uppercase",
+        fontWeight: "bold",
+        fontSize: 24,
+        marginTop: "10%",
+        marginBottom: 10,
+    },
+    subtitle: {
+        textAlign: "center",
+        color: "#ECECEC",
+        textTransform: "uppercase",
+        fontWeight: "bold",
+        fontSize: 18,
+        marginTop: "10%",
+        marginBottom: 10,
+    },
     inputContainer: {
         marginTop: 30,
-        borderColor: "#ECECEC",
+        borderColor: "#414496",
         borderWidth: 1,
         width: "80%",
         borderRadius: 10,
@@ -115,15 +134,16 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     spremiButton: {
-        backgroundColor: "#ECECEC",
-        padding: 10,
+        backgroundColor: "#414496",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
         borderRadius: 10,
         marginTop: 20,
         marginBottom: 10,
     },
     spremiButtonText: {
         textAlign: "center",
-        color: "#181A49",
+        color: "#ECECEC",
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16,

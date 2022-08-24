@@ -11,8 +11,8 @@ export default function HomeAdmin({ route, navigation }: HomeProps) {
     const user = useStore().user;
     return (
         <View style={styles.container}>
-            <Image style={styles.logo} source={require("../../assets/logo.png")} />
             <Text style={styles.username}>{user?.name} (administrator)</Text>
+            <Image style={styles.logo} source={require("../../assets/logo.png")} />
             <TouchableOpacity
                 style={styles.menuButton}
                 activeOpacity={0.9}
@@ -20,7 +20,7 @@ export default function HomeAdmin({ route, navigation }: HomeProps) {
                     navigation.navigate("Brodovi");
                 }}
             >
-                <Fontisto name="ship" size={24} color="#181A49" style={styles.menuButtonIcon} />
+                <Fontisto name="ship" size={24} color="#ECECEC" style={styles.menuButtonIcon} />
                 <Text style={styles.menuButtonText}>Brodovi</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -30,7 +30,7 @@ export default function HomeAdmin({ route, navigation }: HomeProps) {
                     navigation.navigate("Radnici");
                 }}
             >
-                <FontAwesome name="group" size={24} color="#181A49" style={styles.menuButtonIcon} />
+                <FontAwesome name="group" size={24} color="#ECECEC" style={styles.menuButtonIcon} />
                 <Text style={styles.menuButtonText}>Radnici</Text>
             </TouchableOpacity>
         </View>
@@ -43,20 +43,23 @@ const styles = StyleSheet.create({
         backgroundColor: "#181A49",
         alignItems: "center",
     },
+    username: {
+        color: "#ECECEC",
+        fontSize: 12,
+        marginTop: 10,
+        textAlign: "right",
+    },
     logo: {
         width: 80,
         height: 80,
         marginTop: "10%",
-    },
-    username: {
-        color: "#ECECEC",
-        fontSize: 12,
         marginBottom: "30%",
     },
     menuButton: {
         flexDirection: "row",
+        justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#ECECEC",
+        backgroundColor: "#414496",
         paddingVertical: 15,
         paddingHorizontal: 20,
         borderRadius: 10,
@@ -68,9 +71,9 @@ const styles = StyleSheet.create({
     },
     menuButtonText: {
         textAlign: "center",
-        color: "#181A49",
+        color: "#ECECEC",
         textTransform: "uppercase",
         fontWeight: "bold",
-        fontSize: 24,
+        fontSize: 18,
     },
 });

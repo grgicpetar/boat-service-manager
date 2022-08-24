@@ -15,7 +15,7 @@ export default function Brodovi({ navigation }: BrodoviProps) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://192.168.0.16:3000/ship`, {
+            const response = await fetch(`http://192.168.1.10:3000/ship`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
@@ -74,22 +74,23 @@ const styles = StyleSheet.create({
         color: "#ECECEC",
         textTransform: "uppercase",
         fontWeight: "bold",
-        fontSize: 32,
+        fontSize: 24,
     },
     listaBrodova: {
         marginTop: 50,
         width: "90%",
         flexGrow: 0,
+        marginBottom: 20,
     },
     listaBrodovaItem: {
-        backgroundColor: "#ECECEC",
-        marginBottom: 10,
+        backgroundColor: "#414496",
+        marginBottom: 20,
         paddingVertical: 10,
         borderRadius: 10,
     },
     listaBrodovaItemText: {
         textAlign: "center",
-        color: "#181A49",
+        color: "#ECECEC",
         fontSize: 20,
     },
 });

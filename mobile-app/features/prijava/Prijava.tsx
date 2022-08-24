@@ -23,7 +23,7 @@ export default function Login({ navigation }: PrijavaProps) {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch("http://192.168.0.16:3000/login", {
+            const response = await fetch("http://192.168.1.10:3000/login", {
                 method: "post",
                 body: JSON.stringify({
                     username,
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "#ECECEC",
-        fontSize: 28,
+        fontSize: 24,
     },
     loginForm: {
         marginTop: "40%",
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     input: {
         color: "#ECECEC",
         textAlign: "center",
-        borderBottomColor: "#ECECEC",
+        borderBottomColor: "#414496",
         borderBottomWidth: 1,
         borderRadius: 10,
         fontSize: 20,
@@ -114,13 +114,13 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
     },
     loginButton: {
-        backgroundColor: "#ECECEC",
+        backgroundColor: "#414496",
         padding: 10,
         borderRadius: 10,
     },
     loginButtonText: {
         textAlign: "center",
-        color: "#181A49",
+        color: "#ECECEC",
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16,

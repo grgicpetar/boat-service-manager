@@ -19,7 +19,7 @@ export default function Brod({ route, navigation }: BrodProps) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const responseShip = await fetch(`http://192.168.0.16:3000/ship/${shipId}`, {
+            const responseShip = await fetch(`http://192.168.1.10:3000/ship/${shipId}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export default function Brod({ route, navigation }: BrodProps) {
             const jsonShip = await responseShip.json();
             setShip(jsonShip);
 
-            const responseWorkers = await fetch(`http://192.168.0.16:3000/user_ship/workers/${shipId}`, {
+            const responseWorkers = await fetch(`http://192.168.1.10:3000/user_ship/workers/${shipId}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
@@ -99,9 +99,9 @@ const styles = StyleSheet.create({
         color: "#ECECEC",
         textTransform: "uppercase",
         fontWeight: "bold",
-        fontSize: 32,
+        fontSize: 24,
         marginTop: "10%",
-        marginBottom: 10,
+        marginBottom: 20,
     },
     slikaBroda: {
         flex: 1,
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
         width: "80%",
         borderRadius: 10,
         paddingVertical: 10,
+        marginBottom: 40,
     },
     brodInfo: {
         textAlign: "center",
@@ -132,7 +133,8 @@ const styles = StyleSheet.create({
     radniciItem: {
         padding: 10,
         borderWidth: 1,
-        borderColor: "#ECECEC",
+        borderColor: "#414496",
+        backgroundColor: "#414496",
         borderRadius: 10,
         width: 140,
         marginHorizontal: 10,
@@ -143,8 +145,12 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     zaduziRadnikeButton: {
-        color: "#2272B4",
+        color: "#414496",
         fontSize: 12,
         marginTop: 5,
+        borderWidth: 1,
+        borderColor: "#414496",
+        borderRadius: 10,
+        padding: 10,
     },
 });

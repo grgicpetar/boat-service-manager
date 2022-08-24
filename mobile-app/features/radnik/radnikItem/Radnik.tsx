@@ -13,7 +13,7 @@ export default function Radnik({ route, navigation }: RadnikProps) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://192.168.0.16:3000/user_ship/${username}`, {
+            const response = await fetch(`http://192.168.1.10:3000/user_ship/${username}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
@@ -57,12 +57,13 @@ const styles = StyleSheet.create({
         color: "#ECECEC",
         textTransform: "uppercase",
         fontWeight: "bold",
-        fontSize: 32,
+        fontSize: 24,
         marginTop: "10%",
-        marginBottom: 10,
+        marginBottom: 40,
     },
     trenutnoZaduzen: {
         color: "#ECECEC",
+        marginBottom: 10,
     },
     brodoviContainer: {
         marginTop: 10,
@@ -74,7 +75,8 @@ const styles = StyleSheet.create({
     brodItem: {
         padding: 10,
         borderWidth: 1,
-        borderColor: "#ECECEC",
+        borderColor: "#414496",
+        backgroundColor: "#414496",
         borderRadius: 10,
         width: 140,
         marginHorizontal: 10,

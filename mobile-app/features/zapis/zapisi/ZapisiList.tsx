@@ -18,7 +18,7 @@ export default function ZapisiList({ shipId, navigation, shipName }: ZapisiProps
 
     useEffect(() => {
         const fetchData = async () => {
-            const responseZapisi = await fetch(`http://192.168.0.16:3000/record/ship/${shipId}`, {
+            const responseZapisi = await fetch(`http://192.168.1.10:3000/record/ship/${shipId}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
@@ -34,12 +34,7 @@ export default function ZapisiList({ shipId, navigation, shipName }: ZapisiProps
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                activeOpacity={0.9}
-                onPress={() => navigation.navigate("NoviZapis", { brodId: shipId, shipName })}
-            >
-                <AntDesign name="pluscircleo" size={32} color="#ECECEC" />
-            </TouchableOpacity>
+            <Text style={styles.title}>Zapisi</Text>
             <FlatList
                 style={styles.listaZapisa}
                 data={zapisi}
@@ -50,6 +45,12 @@ export default function ZapisiList({ shipId, navigation, shipName }: ZapisiProps
                     </View>
                 )}
             />
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => navigation.navigate("NoviZapis", { brodId: shipId, shipName })}
+            >
+                <AntDesign name="pluscircleo" size={32} color="#ECECEC" />
+            </TouchableOpacity>
         </View>
     );
 }
@@ -68,19 +69,22 @@ const styles = StyleSheet.create({
         flexGrow: 0,
     },
     listaZapisaItem: {
-        backgroundColor: "#ECECEC",
-        marginBottom: 10,
+        backgroundColor: "#414496",
+        marginBottom: 20,
         paddingVertical: 10,
         borderRadius: 10,
         justifyContent: "space-around",
         alignItems: "center",
     },
+    title: {
+        color: "#ECECEC",
+    },
     listaZapisaItemNaziv: {
-        color: "#181A49",
+        color: "#ECECEC",
         fontSize: 20,
     },
     listaZapisaItemRadnikNaziv: {
-        color: "#181A49",
+        color: "#ECECEC",
         fontSize: 12,
     },
 });

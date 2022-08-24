@@ -18,7 +18,7 @@ export default function NoviRadnik({ navigation }: NoviRadnikProps) {
         const radnikIsValid = validateRadnik();
         if (radnikIsValid === "valid") {
             try {
-                const response = await fetch("http://192.168.0.16:3000/user", {
+                const response = await fetch("http://192.168.1.10:3000/user", {
                     method: "post",
                     body: JSON.stringify({
                         name,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "#ECECEC",
-        fontSize: 32,
+        fontSize: 24,
         marginTop: "10%",
         textTransform: "uppercase",
     },
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     input: {
         color: "#ECECEC",
         textAlign: "center",
-        borderBottomColor: "#ECECEC",
+        borderBottomColor: "#414496",
         borderBottomWidth: 1,
         borderRadius: 10,
         fontSize: 20,
@@ -125,15 +125,16 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     spremiButton: {
-        backgroundColor: "#ECECEC",
-        padding: 10,
+        backgroundColor: "#414496",
+        paddingVertical: 10,
+        paddingHorizontal: 20,
         borderRadius: 10,
         marginTop: 20,
         marginBottom: 10,
     },
     spremiButtonText: {
         textAlign: "center",
-        color: "#181A49",
+        color: "#ECECEC",
         textTransform: "uppercase",
         fontWeight: "bold",
         fontSize: 16,
