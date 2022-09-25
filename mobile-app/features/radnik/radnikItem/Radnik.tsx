@@ -70,8 +70,7 @@ const styles = StyleSheet.create({
     brodoviContainer: {
         marginTop: 10,
         display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
+        flexDirection: "column",
         justifyContent: "center",
     },
     brodItem: {
