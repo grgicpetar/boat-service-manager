@@ -31,12 +31,12 @@ export default function NoviRadnik({ navigation }: NoviRadnikProps) {
 
                 navigation.navigate("Radnik", { imeRadnika: name });
 
-                Alert.alert("Novi radnik", "Uspješno dodan novi radnik!");
+                ToastAndroid.show("Uspješno dodan novi radnik!", ToastAndroid.LONG);
             } catch (error) {
-                ToastAndroid.show("Nešto je pošlo po krivu", ToastAndroid.SHORT);
+                ToastAndroid.show("Nešto je pošlo po krivu", ToastAndroid.LONG);
             }
         } else {
-            Alert.alert("Novi radnik", radnikIsValid);
+            ToastAndroid.show(radnikIsValid, ToastAndroid.LONG);
         }
     }
 

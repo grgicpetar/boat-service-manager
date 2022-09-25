@@ -31,12 +31,12 @@ export default function NoviZapis({ route, navigation }: NoviZapisProps) {
 
                 navigation.navigate("Brod", { id: brodId });
 
-                Alert.alert("Novi zapis", "Uspješno dodan novi zapis!");
+                ToastAndroid.show("Uspješno dodan novi zapis!", ToastAndroid.LONG);
             } catch (error) {
-                ToastAndroid.show("Nešto je pošlo po krivu", ToastAndroid.SHORT);
+                ToastAndroid.show("Nešto je pošlo po krivu", ToastAndroid.LONG);
             }
         } else {
-            Alert.alert("Novi brod", isValid);
+            ToastAndroid.show(isValid, ToastAndroid.LONG);
         }
     }
 

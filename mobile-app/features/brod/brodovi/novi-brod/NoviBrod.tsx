@@ -39,12 +39,12 @@ export default function NoviBrod({ navigation }: NoviBrodProps) {
 
                 navigation.navigate("Brod", { id: json.id });
 
-                Alert.alert("Novi brod", "Uspješno dodan novi brod!");
+                ToastAndroid.show("Uspješno dodan novi brod!", ToastAndroid.LONG);
             } catch (error) {
-                ToastAndroid.show("Nešto je pošlo po krivu", ToastAndroid.SHORT);
+                ToastAndroid.show("Nešto je pošlo po krivu", ToastAndroid.LONG);
             }
         } else {
-            Alert.alert("Novi brod", brodIsValid);
+            ToastAndroid.show(brodIsValid, ToastAndroid.LONG);
         }
     }
 

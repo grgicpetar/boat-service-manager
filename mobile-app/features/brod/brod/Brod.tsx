@@ -81,7 +81,9 @@ export default function Brod({ route, navigation }: BrodProps) {
                             <Text style={styles.zaduziRadnikeButton}>Zaduži radnike</Text>
                         </TouchableOpacity>
                     ) : null}
-                    <Zapisi shipId={shipId} navigation={navigation} shipName={ship.name} />
+                    <View style={styles.zapisi}>
+                        <Zapisi shipId={shipId} navigation={navigation} shipName={ship.name} />
+                    </View>
                 </>
             ) : (
                 <View>
@@ -156,5 +158,8 @@ const styles = StyleSheet.create({
         borderColor: "#414496",
         borderRadius: 10,
         padding: 10,
+    },
+    zapisi: {
+        marginTop: "20%",
     },
 });

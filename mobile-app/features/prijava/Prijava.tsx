@@ -45,7 +45,7 @@ export default function Login({ navigation }: PrijavaProps) {
                 navigation.navigate("HomeRadnik");
             }
         } catch (error) {
-            ToastAndroid.show("Krivo korisničko ime ili lozinka", ToastAndroid.SHORT);
+            ToastAndroid.show("Krivo korisničko ime ili lozinka", ToastAndroid.LONG);
         } finally {
         }
     };

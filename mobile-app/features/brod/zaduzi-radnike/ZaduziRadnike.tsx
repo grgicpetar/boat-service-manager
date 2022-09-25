@@ -53,7 +53,7 @@ export default function ZaduziRadnike({ route, navigation }: ZaduziZadnikeProps)
             });
             navigation.navigate("Brod", { id: brodId });
 
-            Alert.alert("Zaduženje", "Zaduženje uspješno spremljeno!");
+            ToastAndroid.show("Zaduženje uspješno spremljeno!", ToastAndroid.LONG);
         } catch (error) {
             ToastAndroid.show("Nešto je pošlo po krivu", ToastAndroid.SHORT);
         }
