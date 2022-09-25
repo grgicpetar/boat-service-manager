@@ -22,7 +22,16 @@ export default function Radnici({ navigation }: RadniciProps) {
             });
             const json = await response.json();
 
-            setRadnici(json.filter((user: any) => user.role === 2));
+            setRadnici(
+                json
+                    .filter((user: any) => user.role === 2)
+                    .map((user: any, i: number) => {
+                        return {
+                            ...user,
+                            id: i,
+                        };
+                    })
+            );
         };
         if (isFocused) {
             fetchData();

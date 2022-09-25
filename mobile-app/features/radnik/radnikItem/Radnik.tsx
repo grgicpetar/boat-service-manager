@@ -28,7 +28,9 @@ export default function Radnik({ route, navigation }: RadnikProps) {
     return (
         <View style={styles.container}>
             <Text style={styles.imeRadnika}>{route.params.imeRadnika}</Text>
-            <Text style={styles.trenutnoZaduzen}>Trenutno zadužen za brodove:</Text>
+            <Text style={styles.trenutnoZaduzen}>
+                {ships.length ? "Trenutno zadužen za brodove:" : "Trenutno nije zadužen za nijedan brod"}
+            </Text>
             <View style={styles.brodoviContainer}>
                 {ships.map((item, i) => (
                     <TouchableOpacity

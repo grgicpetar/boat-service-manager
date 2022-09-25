@@ -22,6 +22,8 @@ export default function Brodovi({ navigation }: BrodoviProps) {
                 },
             });
             const json = await response.json();
+
+            console.log(json);
             setShips(json);
         };
         if (isFocused) {

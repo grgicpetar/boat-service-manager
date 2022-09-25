@@ -56,7 +56,7 @@ export default function NoviRadnik({ navigation }: NoviRadnikProps) {
                     <TextInput
                         value={name}
                         style={styles.input}
-                        placeholder={"Ime"}
+                        placeholder={"Korisničko ime"}
                         placeholderTextColor={"rgba(236, 236, 236, 0.3)"}
                         onChangeText={(text) => setName(text)}
                     />
