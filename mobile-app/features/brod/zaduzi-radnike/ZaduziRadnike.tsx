@@ -45,7 +45,7 @@ export default function ZaduziRadnike({ route, navigation }: ZaduziZadnikeProps)
                 method: "post",
                 body: JSON.stringify({
                     shipId: brodId,
-                    workerNames: zaduzeniRadniciKeys,
+                    workerNames: zaduzeniRadniciKeys ? zaduzeniRadniciKeys : [],
                 }),
                 headers: {
                     "Content-Type": "application/json",

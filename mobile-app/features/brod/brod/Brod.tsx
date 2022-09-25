@@ -50,7 +50,11 @@ export default function Brod({ route, navigation }: BrodProps) {
                     <View style={styles.brodInfoContainer}>
                         <Text style={styles.brodInfo}>{ship.description}</Text>
                     </View>
-                    <Text style={styles.trenutnoZaduzen}>Trenutno zaduženi radnici za ovaj brod:</Text>
+                    <Text style={styles.trenutnoZaduzen}>
+                        {workers.length
+                            ? "Trenutno zaduženi radnici za ovaj brod:"
+                            : "Trenutno nema zaduženih radnika za ovaj brod"}
+                    </Text>
                     <View style={styles.radniciContainer}>
                         {workers.map((item, i) => (
                             <TouchableOpacity

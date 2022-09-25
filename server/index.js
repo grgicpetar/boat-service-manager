@@ -127,8 +127,13 @@ app.post("/user_ship", async (req, res) => {
 
     const query = `DELETE FROM "boat-service-manager".user_ship
 	WHERE ship_id = ${shipId};
-    INSERT INTO "boat-service-manager".user_ship(
-        user_name, ship_id) VALUES ${values} RETURNING * `;
+    ${
+        values.length
+            ? `INSERT INTO "boat-service-manager".user_ship(
+        user_name, ship_id) VALUES ${values} RETURNING * `
+            : ""
+    }
+    `;
 
     try {
         const user_ship = await pool.query(query);

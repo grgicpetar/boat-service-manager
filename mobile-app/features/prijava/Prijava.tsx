@@ -66,6 +66,7 @@ export default function Login({ navigation }: PrijavaProps) {
                 </View>
                 <View style={styles.inputContainer}>
                     <TextInput
+                        secureTextEntry
                         style={styles.input}
                         value={password}
                         placeholder={"Lozinka"}
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
     },
     loginForm: {
-        marginTop: "40%",
+        marginTop: "14%",
     },
     inputContainer: {
         marginBottom: 20,

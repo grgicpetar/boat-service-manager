@@ -34,7 +34,7 @@ export default function ZapisiList({ shipId, navigation, shipName }: ZapisiProps
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Zapisi</Text>
+            <Text style={styles.title}>{!zapisi.length ? "Trenutno nema zapisa za ovaj brod" : "Zapisi:"}</Text>
             <FlatList
                 style={styles.listaZapisa}
                 data={zapisi}
