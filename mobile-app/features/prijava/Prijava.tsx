@@ -23,7 +23,7 @@ export default function Login({ navigation }: PrijavaProps) {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch("http://192.168.1.10:3000/login", {
+            const response = await fetch("http://192.168.1.86:3000/login", {
                 method: "post",
                 body: JSON.stringify({
                     username,

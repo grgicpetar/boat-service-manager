@@ -18,7 +18,7 @@ export default function NoviRadnik({ navigation }: NoviRadnikProps) {
         const radnikIsValid = validateRadnik();
         if (radnikIsValid === "valid") {
             try {
-                const response = await fetch("http://192.168.1.10:3000/user", {
+                const response = await fetch("http://192.168.1.86:3000/user", {
                     method: "post",
                     body: JSON.stringify({
                         name,

@@ -15,7 +15,7 @@ export default function ZaduziRadnike({ route, navigation }: ZaduziZadnikeProps)
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://192.168.1.10:3000/user`, {
+            const response = await fetch(`http://192.168.1.86:3000/user`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export default function ZaduziRadnike({ route, navigation }: ZaduziZadnikeProps)
 
     async function spremi() {
         try {
-            await fetch("http://192.168.1.10:3000/user_ship", {
+            await fetch("http://192.168.1.86:3000/user_ship", {
                 method: "post",
                 body: JSON.stringify({
                     shipId: brodId,
@@ -60,7 +60,7 @@ export default function ZaduziRadnike({ route, navigation }: ZaduziZadnikeProps)
     }
 
     return (
-        <View style={styles.container}>
+        <View style={{ flexGrow: 1, backgroundColor: "#181A49", alignItems: "center" }}>
             <Text style={styles.title}>{imeBroda}</Text>
             <Text style={styles.subtitle}>Zaduži radnike</Text>
             <View style={styles.radniciContainer}>
@@ -73,7 +73,7 @@ export default function ZaduziRadnike({ route, navigation }: ZaduziZadnikeProps)
                                 backgroundColor: zaduzeniRadniciKeys.find(
                                     (zaduzeniRadnikKey) => zaduzeniRadnikKey === radnik.name
                                 )
-                                    ? "#9bc8ee"
+                                    ? "#414496"
                                     : "#ECECEC",
                             },
                         ]}

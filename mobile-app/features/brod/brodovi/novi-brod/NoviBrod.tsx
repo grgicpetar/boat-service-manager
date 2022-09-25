@@ -25,7 +25,7 @@ export default function NoviBrod({ navigation }: NoviBrodProps) {
         const brodIsValid = validateBrod();
         if (brodIsValid === "valid") {
             try {
-                const response = await fetch("http://192.168.1.10:3000/ship", {
+                const response = await fetch("http://192.168.1.86:3000/ship", {
                     method: "post",
                     body: JSON.stringify({
                         name: nazivBroda,

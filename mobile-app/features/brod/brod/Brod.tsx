@@ -19,7 +19,7 @@ export default function Brod({ route, navigation }: BrodProps) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const responseShip = await fetch(`http://192.168.1.10:3000/ship/${shipId}`, {
+            const responseShip = await fetch(`http://192.168.1.86:3000/ship/${shipId}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export default function Brod({ route, navigation }: BrodProps) {
             const jsonShip = await responseShip.json();
             setShip(jsonShip);
 
-            const responseWorkers = await fetch(`http://192.168.1.10:3000/user_ship/workers/${shipId}`, {
+            const responseWorkers = await fetch(`http://192.168.1.86:3000/user_ship/workers/${shipId}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",

@@ -14,7 +14,7 @@ export default function Radnici({ navigation }: RadniciProps) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://192.168.1.10:3000/user`, {
+            const response = await fetch(`http://192.168.1.86:3000/user`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",

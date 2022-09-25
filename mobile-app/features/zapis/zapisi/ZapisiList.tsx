@@ -18,7 +18,7 @@ export default function ZapisiList({ shipId, navigation, shipName }: ZapisiProps
 
     useEffect(() => {
         const fetchData = async () => {
-            const responseZapisi = await fetch(`http://192.168.1.10:3000/record/ship/${shipId}`, {
+            const responseZapisi = await fetch(`http://192.168.1.86:3000/record/ship/${shipId}`, {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json",
